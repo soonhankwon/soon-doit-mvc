@@ -1,6 +1,7 @@
 package soon.soondoitmvc.domain;
 
 import lombok.NoArgsConstructor;
+import soon.soondoitmvc.dto.SignupReqDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,4 +22,20 @@ public class User {
     private LocalDateTime created_at;
 
     private LocalDateTime modified_at;
+
+    public User(SignupReqDto dto) {
+        this.name = dto.getName();
+        this.password = dto.getPassword();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", created_at=" + created_at +
+                ", modified_at=" + modified_at +
+                '}';
+    }
 }
