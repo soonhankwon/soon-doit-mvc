@@ -25,7 +25,7 @@
          th:text="${err}">전체 오류 메시지</p></div>
     <div>
       <label for="name">로그인 ID</label>
-      <input type="text" id="loginId" th:field="*{name}" class="form-control"
+      <input type="text" id="name" th:field="*{name}" class="form-control"
              th:errorclass=" field-error">
       <div class="field-error" th:errors="*{name}"/>
     </div>
@@ -35,12 +35,6 @@
              class="form-control"
              th:errorclass="field-error">
       <div class="field-error" th:errors="*{password}"/>
-    </div>
-    <div>
-      <label for="name">이름</label>
-      <input type="text" id="name" th:field="*{name}" class="form-control"
-             th:errorclass=" field-error">
-      <div class="field-error" th:errors="*{name}"/>
     </div>
     <hr class="my-4">
     <div class="row">
