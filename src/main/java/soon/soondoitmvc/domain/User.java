@@ -38,4 +38,8 @@ public class User {
                 ", modified_at=" + modified_at +
                 '}';
     }
+
+    public boolean isPasswordValid(String password) {
+        return this.password.equals(password);
+    }
 }
