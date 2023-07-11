@@ -1,11 +1,13 @@
 package soon.soondoitmvc.domain;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 @NoArgsConstructor
 @Table(name = "mission")
 public class Mission {
@@ -14,9 +16,21 @@ public class Mission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String deadLine;
+
     private String content;
+
+    private String status;
 
     private LocalDateTime created_at;
 
-    private LocalDateTime modified_at;
+    @ManyToOne
+    private User user;
+
+    public Mission(String deadLine, String content) {
+        this.deadLine = deadLine;
+        this.content = content;
+        this.status = "NOT YET";
+        this.created_at = LocalDateTime.now();
+    }
 }

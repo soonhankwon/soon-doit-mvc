@@ -3,12 +3,15 @@ package soon.soondoitmvc.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import soon.soondoitmvc.domain.Mission;
 import soon.soondoitmvc.dto.MissionSaveReqDto;
 import soon.soondoitmvc.dto.MissionUpdateReqDto;
 import soon.soondoitmvc.repository.MissionRepository;
+import soon.soondoitmvc.service.MissionService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,10 +21,18 @@ import java.util.Optional;
 public class MissionController {
 
     private final MissionRepository missionRepository;
+    private final MissionService missionService;
 
     @GetMapping
     public String missions(Model model) {
         List<Mission> missions = missionRepository.findAll();
+        model.addAttribute("missions", missions);
+        return "missions/missions";
+    }
+
+    @GetMapping("{name}")
+    public String missions(@PathVariable String name, Model model) {
+        List<Mission> missions = missionService.findMissionsByUser(name);
         model.addAttribute("missions", missions);
         return "missions/missions";
     }
@@ -41,8 +52,9 @@ public class MissionController {
     }
 
     @PostMapping("/add")
-    public String addMission(@ModelAttribute("mission")MissionSaveReqDto dto) {
-        return "missions/addForm";
+    public String addMission(@Validated @ModelAttribute("mission")MissionSaveReqDto dto) {
+        missionService.save(dto);
+        return "redirect:/missions";
     }
 
     @GetMapping("/{missionId}/edit")
