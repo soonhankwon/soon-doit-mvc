@@ -32,4 +32,13 @@ public class MissionService {
         missionRepository.save(new Mission(dto.getDeadLine(), dto.getContent()));
         log.info("deadline={}, content={}", dto.getDeadLine(), dto.getContent());
     }
+
+    public List<Mission> findAllMission() {
+        return missionRepository.findAll();
+    }
+
+    public Mission findMissionById(Long missionId) {
+        return missionRepository.findById(missionId)
+                .orElseThrow(() -> new IllegalArgumentException());
+    }
 }

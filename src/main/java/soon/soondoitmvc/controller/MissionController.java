@@ -8,39 +8,27 @@ import org.springframework.web.bind.annotation.*;
 import soon.soondoitmvc.domain.Mission;
 import soon.soondoitmvc.dto.MissionSaveReqDto;
 import soon.soondoitmvc.dto.MissionUpdateReqDto;
-import soon.soondoitmvc.repository.MissionRepository;
 import soon.soondoitmvc.service.MissionService;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/missions")
 public class MissionController {
 
-    private final MissionRepository missionRepository;
     private final MissionService missionService;
 
     @GetMapping
     public String missions(Model model) {
-        List<Mission> missions = missionRepository.findAll();
-        model.addAttribute("missions", missions);
-        return "missions/missions";
-    }
-
-    @GetMapping("{name}")
-    public String missions(@PathVariable String name, Model model) {
-        List<Mission> missions = missionService.findMissionsByUser(name);
+        List<Mission> missions = missionService.findAllMission();
         model.addAttribute("missions", missions);
         return "missions/missions";
     }
 
     @GetMapping("/{missionId}")
     public String mission(@PathVariable Long missionId, Model model) {
-        Optional<Mission> optional = missionRepository.findById(missionId);
-        Mission mission = optional.orElseThrow();
+        Mission mission = missionService.findMissionById(missionId);
         model.addAttribute("mission", mission);
         return "missions/mission";
     }
@@ -59,8 +47,7 @@ public class MissionController {
 
     @GetMapping("/{missionId}/edit")
     public String editForm(@PathVariable Long missionId, Model model) {
-        Optional<Mission> optional = missionRepository.findById(missionId);
-        Mission mission = optional.orElseThrow();
+        Mission mission = missionService.findMissionById(missionId);
         model.addAttribute("mission", mission);
         return "missions/editForm";
     }
