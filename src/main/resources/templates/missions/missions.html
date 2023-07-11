@@ -26,17 +26,18 @@
     <table class="table">
       <thead>
       <tr>
-        <th th:text="#{label.mission.date}">DATE</th>
+        <th th:text="#{label.mission.id}">TODO ID</th>
+        <th th:text="#{label.mission.deadline}">DEADLINE</th>
         <th th:text="#{label.mission.content}">CONTENT</th>
         <th th:text="#{label.mission.status}">STATUS</th>
       </tr>
       </thead>
       <tbody>
       <tr th:each="mission : ${missions}">
-        <td><a href="mission.html" th:href="@{/missions/{missionId}(missionId=${mission.id})}" th:text="${item.id}">회원id</a></td>
-        <td><a href="mission.html" th:href="@{|/missions/${mission.id}|}" th:text="${mission.itemName}">상품명</a></td>
-        <td th:text="${mission.price}">10000</td>
-        <td th:text="${mission.quantity}">10</td>
+        <td><a href="mission.html" th:href="@{/missions/{missionId}(missionId=${mission.id})}" th:text="${mission.id}">TODO ID</a></td>
+        <td th:text="${mission.deadLine}">DEAD LINE</td>
+        <td th:text="${mission.content}">CONTENT</td>
+        <td th:text="${mission.status}">COMPLETED</td>
       </tr>
       </tbody>
     </table>

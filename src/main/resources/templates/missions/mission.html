@@ -20,18 +20,21 @@
 
   <!-- 추가 -->
   <h2 th:if="${param.status}" th:text="'저장 완료'"></h2>
-
   <div>
-    <label for="date" th:text="#{label.mission.date}">DATE</label>
-    <input type="text" id="date" name="date" class="form-control" value="1" th:value="${item.id}" readonly>
+    <label for="id" th:text="#{label.mission.id}">TODO ID</label>
+    <input type="text" id="id" name="id" class="form-control" value="1" th:value="${mission.id}" readonly>
+  </div>
+  <div>
+    <label for="deadline" th:text="#{label.mission.deadline}">DEADLINE</label>
+    <input type="text" id="deadline" name="deadline" class="form-control" value="23-01-02" th:value="${mission.deadLine}" readonly>
   </div>
   <div>
     <label for="content" th:text="#{label.mission.content}">CONTENT</label>
-    <input type="text" id="content" name="content" class="form-control" value="상품A" th:value="${item.itemName}" readonly>
+    <input type="text" id="content" name="content" class="form-control" value="상품A" th:value="${mission.content}" readonly>
   </div>
   <div>
     <label for="status" th:text="#{label.mission.status}">STATUS</label>
-    <input type="text" id="status" name="status" class="form-control" value="10000" th:value="${item.price}" readonly>
+    <input type="text" id="status" name="status" class="form-control" value="10000" th:value="${mission.status}" readonly>
   </div>
 
   <hr class="my-4">
