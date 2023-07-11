@@ -28,6 +28,10 @@ public class User {
         this.password = dto.getPassword();
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
         return "User{" +
