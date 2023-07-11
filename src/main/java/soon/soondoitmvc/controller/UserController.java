@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import soon.soondoitmvc.dto.SignupReqDto;
 import soon.soondoitmvc.service.UserService;
 
+import javax.validation.Valid;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/users")
@@ -23,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public String save(@ModelAttribute SignupReqDto dto, BindingResult bindingResult) {
+    public String save(@Valid @ModelAttribute SignupReqDto dto, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return "users/addUserForm";
         }
