@@ -1,6 +1,8 @@
 package soon.soondoitmvc.domain;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import soon.soondoitmvc.dto.SignupReqDto;
 
 import javax.persistence.*;
@@ -8,6 +10,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
+@Getter
+@ToString
 @Table(name = "`user`")
 public class User {
 
@@ -26,24 +30,5 @@ public class User {
     public User(SignupReqDto dto) {
         this.name = dto.getName();
         this.password = dto.getPassword();
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", created_at=" + created_at +
-                ", modified_at=" + modified_at +
-                '}';
-    }
-
-    public boolean isPasswordValid(String password) {
-        return this.password.equals(password);
     }
 }
