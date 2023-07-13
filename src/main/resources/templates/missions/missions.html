@@ -13,11 +13,18 @@
   </div>
 
   <div class="row">
-    <div class="col">
+    <div class="col-auto ms-auto">
       <button class="btn btn-primary float-end"
               onclick="location.href='addForm.html'"
               th:onclick="|location.href='@{/missions/add}'|"
               type="button" th:text="#{page.save}">SAVE</button>
+    </div>
+    <div class="col-auto">
+      <form th:action="@{/logout}" method="post">
+        <button class="btn btn-primary" type="submit">
+          LOGOUT
+        </button>
+      </form>
     </div>
   </div>
 
