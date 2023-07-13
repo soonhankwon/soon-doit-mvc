@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import soon.soondoitmvc.domain.User;
 import soon.soondoitmvc.dto.LoginReqDto;
 import soon.soondoitmvc.service.LoginService;
@@ -29,20 +30,21 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String login(@Validated @ModelAttribute LoginReqDto dto, BindingResult bindingResult, HttpServletRequest request) {
+    public String login(@Validated @ModelAttribute LoginReqDto dto, BindingResult bindingResult,
+                        @RequestParam(defaultValue = "/") String redirectURL, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
         }
 
         User loginUser = loginService.login(dto);
         if (loginUser == null) {
-            bindingResult.reject("loginFail", "password incorrect");
+            bindingResult.reject("loginFail", "id or password incorrect");
             return "login/loginForm";
         }
 
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_USER, loginUser);
-        return "redirect:/";
+        return "redirect:" + redirectURL;
     }
 
     @PostMapping("/logout")
