@@ -23,12 +23,14 @@ public class User {
 
     private String password;
 
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
-    private LocalDateTime modified_at;
+    private LocalDateTime modifiedAt;
 
     public User(SignupReqDto dto) {
         this.name = dto.getName();
         this.password = dto.getPassword();
+        this.createdAt = LocalDateTime.now();
+        this.modifiedAt = LocalDateTime.now();
     }
 }

@@ -23,7 +23,7 @@ public class Mission {
 
     private String status;
 
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
@@ -33,7 +33,7 @@ public class Mission {
         this.content = content;
         this.status = "NOT YET";
         this.user = user;
-        this.created_at = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
     }
 
     public void update(MissionUpdateReqDto dto) {
