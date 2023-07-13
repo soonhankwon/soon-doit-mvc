@@ -22,6 +22,7 @@ public class MissionController {
     @GetMapping
     public String missions(Model model) {
         List<Mission> missions = missionService.findAllMission();
+//        missionService.findAllMissionByUser(userId);
         model.addAttribute("missions", missions);
         return "missions/missions";
     }
