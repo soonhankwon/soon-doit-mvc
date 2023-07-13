@@ -16,21 +16,21 @@
 </head>
 <body>
 <div class="container">
-  <div class="py-5 text-center"><h2>회원 가입</h2>
+  <div class="py-5 text-center"><h2>SIGN UP USER</h2>
   </div>
-  <h4 class="mb-3">회원 정보 입력</h4>
+  <h4 class="mb-3">INPUT USER INFORMATION</h4>
   <form action="" th:action th:object="${signupReqDto}" method="post">
     <div th:if="${#fields.hasGlobalErrors()}">
       <p class="field-error" th:each="err : ${#fields.globalErrors()}"
          th:text="${err}">전체 오류 메시지</p></div>
     <div>
-      <label for="name">로그인 ID</label>
+      <label for="name">LOGIN ID</label>
       <input type="text" id="name" th:field="*{name}" class="form-control"
              th:errorclass=" field-error">
       <div class="field-error" th:errors="*{name}"/>
     </div>
     <div>
-      <label for="password">비밀번호</label>
+      <label for="password">PASSWORD</label>
       <input type="password" id="password" th:field="*{password}"
              class="form-control"
              th:errorclass="field-error">
@@ -39,15 +39,14 @@
     <hr class="my-4">
     <div class="row">
       <div class="col">
-        <button class="w-100 btn btn-primary btn-lg" type="submit">회원
-          가입
+        <button class="w-100 btn btn-primary btn-lg" type="submit"> SIGN UP
         </button>
       </div>
       <div class="col">
         <button class="w-100 btn btn-secondary btn-lg"
                 onclick="location.href='items.html'"
                 th:onclick="|location.href='@{/}'|"
-                type="button">취소</button>
+                type="button">CANCEL</button>
       </div>
     </div>
   </form>

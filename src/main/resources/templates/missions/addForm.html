@@ -29,15 +29,15 @@
     </div>
 
     <div>
-      <label for="deadLine" th:text="#{label.mission.deadline}">DATE</label>
+      <label for="deadLine" th:text="#{label.mission.deadline}">DEADLINE</label>
       <input type="text" id="deadLine" th:field="*{deadLine}"
              th:errorclass="field-error" class="form-control" placeholder="INPUT DATE">
       <div class="field-error" th:errors="*{deadLine}">
-        DATE 오류
+        마감일 오류
       </div>
     </div>
     <div>
-      <label for="content" th:text="#{label.mission.content}">CONTENT</label>
+      <label for="content" th:text="#{label.mission.content}">TODO</label>
       <input type="text" id="content" th:field="*{content}"
              th:errorclass="field-error" class="form-control" placeholder="INPUT CONTENT">
       <div class="field-error" th:errors="*{content}">
