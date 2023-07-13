@@ -1,20 +1,17 @@
 package soon.soondoitmvc.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.validation.constraints.NotEmpty;
 
 @Getter
-public class LoginReqDto {
+@AllArgsConstructor
+public final class LoginReqDto {
 
     @NotEmpty
-    private String name;
+    private final String name;
 
     @NotEmpty
-    private String password;
-
-    public LoginReqDto(String name, String password) {
-        this.name = name;
-        this.password = password;
-    }
+    private final String password;
 }
