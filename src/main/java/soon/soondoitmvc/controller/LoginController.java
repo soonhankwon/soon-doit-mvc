@@ -35,8 +35,6 @@ public class LoginController {
         }
 
         User loginUser = loginService.login(dto);
-        log.info("name ={}, password={}", dto.getName(), dto.getPassword());
-
         if (loginUser == null) {
             bindingResult.reject("loginFail", "password incorrect");
             return "login/loginForm";
