@@ -2,6 +2,7 @@ package soon.soondoitmvc.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import soon.soondoitmvc.dto.MissionUpdateReqDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -32,5 +33,11 @@ public class Mission {
         this.content = content;
         this.status = "NOT YET";
         this.created_at = LocalDateTime.now();
+    }
+
+    public void update(MissionUpdateReqDto dto) {
+        this.deadLine = dto.getDeadLine();
+        this.content = dto.getContent();
+        this.status = dto.getStatus();
     }
 }

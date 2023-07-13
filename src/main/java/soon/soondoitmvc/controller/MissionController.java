@@ -40,7 +40,7 @@ public class MissionController {
     }
 
     @PostMapping("/add")
-    public String addMission(@Validated @ModelAttribute("mission")MissionSaveReqDto dto) {
+    public String addMission(@Validated @ModelAttribute("mission") MissionSaveReqDto dto) {
         missionService.save(dto);
         return "redirect:/missions";
     }
@@ -53,7 +53,8 @@ public class MissionController {
     }
 
     @PostMapping("/{missionId}/edit")
-    public String edit(@PathVariable Long missionId, @ModelAttribute("mission")MissionUpdateReqDto dto) {
+    public String edit(@PathVariable Long missionId, @ModelAttribute("mission") MissionUpdateReqDto dto) {
+        missionService.updateMission(missionId, dto);
         return "redirect:/missions/{missionId}";
     }
 }

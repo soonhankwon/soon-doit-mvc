@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import soon.soondoitmvc.domain.Mission;
 import soon.soondoitmvc.domain.User;
 import soon.soondoitmvc.dto.MissionSaveReqDto;
+import soon.soondoitmvc.dto.MissionUpdateReqDto;
 import soon.soondoitmvc.repository.MissionRepository;
 import soon.soondoitmvc.repository.UserRepository;
 
@@ -40,5 +41,11 @@ public class MissionService {
     public Mission findMissionById(Long missionId) {
         return missionRepository.findById(missionId)
                 .orElseThrow(() -> new IllegalArgumentException());
+    }
+
+    @Transactional
+    public void updateMission(Long missionId, MissionUpdateReqDto dto) {
+        Mission mission = missionRepository.findById(missionId).orElseThrow(IllegalArgumentException::new);
+        mission.update(dto);
     }
 }
