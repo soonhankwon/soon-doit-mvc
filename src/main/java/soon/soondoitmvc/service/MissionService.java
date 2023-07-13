@@ -21,13 +21,6 @@ public class MissionService {
     private final MissionRepository missionRepository;
     private final UserRepository userRepository;
 
-
-    public List<Mission> findMissionsByUser(String name) {
-        User user = userRepository.findUserByName(name)
-                .orElseThrow(IllegalArgumentException::new);
-        return missionRepository.findAllByUser(user);
-    }
-
     @Transactional
     public void save(MissionSaveReqDto dto) {
         missionRepository.save(new Mission(dto.getDeadLine(), dto.getContent()));
@@ -53,5 +46,11 @@ public class MissionService {
     public void deleteMission(Long missionId) {
         Mission mission = missionRepository.findById(missionId).orElseThrow(IllegalArgumentException::new);
         missionRepository.delete(mission);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Mission> findAllMissionByUser(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
+        return missionRepository.findAllByUser(user);
     }
 }
