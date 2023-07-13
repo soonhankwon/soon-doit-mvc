@@ -57,4 +57,10 @@ public class MissionController {
         missionService.updateMission(missionId, dto);
         return "redirect:/missions/{missionId}";
     }
+
+    @PostMapping("/{missionId}/delete")
+    public String delete(@PathVariable Long missionId) {
+        missionService.deleteMission(missionId);
+        return "redirect:/missions";
+    }
 }

@@ -48,4 +48,10 @@ public class MissionService {
         Mission mission = missionRepository.findById(missionId).orElseThrow(IllegalArgumentException::new);
         mission.update(dto);
     }
+
+    @Transactional
+    public void deleteMission(Long missionId) {
+        Mission mission = missionRepository.findById(missionId).orElseThrow(IllegalArgumentException::new);
+        missionRepository.delete(mission);
+    }
 }
