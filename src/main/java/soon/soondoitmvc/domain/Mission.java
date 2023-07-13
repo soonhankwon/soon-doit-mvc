@@ -25,13 +25,14 @@ public class Mission {
 
     private LocalDateTime created_at;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    public Mission(String deadLine, String content) {
+    public Mission(String deadLine, String content, User user) {
         this.deadLine = deadLine;
         this.content = content;
         this.status = "NOT YET";
+        this.user = user;
         this.created_at = LocalDateTime.now();
     }
 

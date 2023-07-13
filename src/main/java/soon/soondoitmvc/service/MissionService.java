@@ -19,16 +19,11 @@ import java.util.List;
 public class MissionService {
 
     private final MissionRepository missionRepository;
-    private final UserRepository userRepository;
 
     @Transactional
-    public void save(MissionSaveReqDto dto) {
-        missionRepository.save(new Mission(dto.getDeadLine(), dto.getContent()));
+    public void save(MissionSaveReqDto dto, User user) {
+        missionRepository.save(new Mission(dto.getDeadLine(), dto.getContent(), user));
         log.info("deadline={}, content={}", dto.getDeadLine(), dto.getContent());
-    }
-
-    public List<Mission> findAllMission() {
-        return missionRepository.findAll();
     }
 
     public Mission findMissionById(Long missionId) {
@@ -49,8 +44,7 @@ public class MissionService {
     }
 
     @Transactional(readOnly = true)
-    public List<Mission> findAllMissionByUser(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
+    public List<Mission> findAllMissionByUser(User user) {
         return missionRepository.findAllByUser(user);
     }
 }

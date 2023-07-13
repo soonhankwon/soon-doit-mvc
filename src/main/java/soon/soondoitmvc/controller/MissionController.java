@@ -1,17 +1,23 @@
 package soon.soondoitmvc.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import soon.soondoitmvc.domain.Mission;
+import soon.soondoitmvc.domain.User;
 import soon.soondoitmvc.dto.MissionSaveReqDto;
 import soon.soondoitmvc.dto.MissionUpdateReqDto;
 import soon.soondoitmvc.service.MissionService;
+import soon.soondoitmvc.session.SessionConst;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/missions")
@@ -20,9 +26,12 @@ public class MissionController {
     private final MissionService missionService;
 
     @GetMapping
-    public String missions(Model model) {
-        List<Mission> missions = missionService.findAllMission();
-//        missionService.findAllMissionByUser(userId);
+    public String missions(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+//        List<Mission> missions = missionService.findAllMission();
+        log.info("sessionUser = {}", loginUser);
+        List<Mission> missions = missionService.findAllMissionByUser(loginUser);
         model.addAttribute("missions", missions);
         return "missions/missions";
     }
@@ -41,8 +50,10 @@ public class MissionController {
     }
 
     @PostMapping("/add")
-    public String addMission(@Validated @ModelAttribute("mission") MissionSaveReqDto dto) {
-        missionService.save(dto);
+    public String addMission(@Validated @ModelAttribute("mission") MissionSaveReqDto dto, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        missionService.save(dto, loginUser);
         return "redirect:/missions";
     }
 
