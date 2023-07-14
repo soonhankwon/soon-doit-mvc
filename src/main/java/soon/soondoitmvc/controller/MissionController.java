@@ -48,9 +48,7 @@ public class MissionController {
     }
 
     @PostMapping("/add")
-    public String addMission(@Validated @ModelAttribute("mission") MissionSaveReqDto dto, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+    public String addMission(@Login User loginUser, @Validated @ModelAttribute("mission") MissionSaveReqDto dto, HttpServletRequest request) {
         missionService.save(dto, loginUser);
         return "redirect:/missions";
     }
