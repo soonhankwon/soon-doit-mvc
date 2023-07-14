@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <link th:href="@{/css/bootstrap.min.css}"
         href="../css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/bootstrap-datepicker.min.css">
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/bootstrap-datepicker.min.js"></script>
   <style>
     .container {
       max-width: 560px;
@@ -13,6 +17,14 @@
       color: #dc3545;
     }
   </style>
+  <script>
+    $(document).ready(function() {
+      $('#deadLine').datepicker({
+        format: 'yy-mm-dd',
+        autoclose: true
+      });
+    });
+  </script>
 </head>
 <body>
 
