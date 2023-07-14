@@ -12,10 +12,8 @@ import soon.soondoitmvc.domain.User;
 import soon.soondoitmvc.dto.MissionSaveReqDto;
 import soon.soondoitmvc.dto.MissionUpdateReqDto;
 import soon.soondoitmvc.service.MissionService;
-import soon.soondoitmvc.session.SessionConst;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
