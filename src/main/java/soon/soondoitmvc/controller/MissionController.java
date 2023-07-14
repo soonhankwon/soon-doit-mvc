@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import soon.soondoitmvc.argumentresolver.Login;
 import soon.soondoitmvc.domain.Mission;
 import soon.soondoitmvc.domain.User;
 import soon.soondoitmvc.dto.MissionSaveReqDto;
@@ -26,10 +27,7 @@ public class MissionController {
     private final MissionService missionService;
 
     @GetMapping
-    public String missions(Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
-//        List<Mission> missions = missionService.findAllMission();
+    public String missions(@Login User loginUser, Model model) {
         log.info("sessionUser = {}", loginUser);
         List<Mission> missions = missionService.findAllMissionByUser(loginUser);
         model.addAttribute("missions", missions);
